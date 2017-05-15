@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "868497686712",
+    "firebase_url": "https://park-5a77a.firebaseio.com",
+    "project_id": "park-5a77a",
+    "storage_bucket": "park-5a77a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868497686712:android:b0c27be2a261fc51",
+        "android_client_info": {
+          "package_name": "com.example.bruhshua.parking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868497686712-33j2bksg50hjnurv237ssk5hljttcsk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0FSlHwrjgsoXI0GKB2NI9hYPuqUuyZEM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
