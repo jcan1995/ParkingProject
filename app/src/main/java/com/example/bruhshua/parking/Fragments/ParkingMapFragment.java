@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.bruhshua.parking.MainActivity;
 import com.example.bruhshua.parking.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,6 +23,9 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
     private SupportMapFragment mSupportMapFragment;
+    private String dayRequested;
+
+    private String time;
 
     public static ParkingMapFragment newInstance(){
         ParkingMapFragment parkingMapFragment = new ParkingMapFragment();
@@ -33,6 +38,16 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map_fragment,container,false);
+
+
+        time = MainActivity.getTime();
+
+        if(time != null){
+            //Todo: Query database, fill ParkingLotProbabilityPOJOs.
+        }
+
+
+        Toast.makeText(getContext(),"Time: "+time,Toast.LENGTH_SHORT).show();
         mSupportMapFragment = SupportMapFragment.newInstance();
         FragmentManager fm = getFragmentManager();
         mSupportMapFragment.getMapAsync(this);

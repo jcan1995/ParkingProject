@@ -1,6 +1,6 @@
 package com.example.bruhshua.parking.Fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bruhshua.parking.Model.Course;
 import com.example.bruhshua.parking.R;
@@ -27,44 +29,43 @@ import java.util.List;
  * Created by bruhshua on 4/24/17.
  */
 
-public class ScheduleFragment extends AppCompatActivity {
+public class ScheduleFragment extends Fragment {
 
     private ListView listview;
-    private ArrayList<Course> userCourses = new ArrayList<>();
+    private ArrayList<Course> studentCourses = new ArrayList<>();
+    private Callback callback;
 
- /*   public static ScheduleFragment newInstance(ArrayList<Course> courses){
+    public interface Callback{
+        public void queryProbabilities(String time);
+    }
 
-        ScheduleFragment fragment = new ScheduleFragment();
+    public static ScheduleFragment newInstance(ArrayList<Course> courses){
+
+        ScheduleFragment scheduleFragment = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putSerializable("COURSES", courses);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
+        scheduleFragment.setArguments(args);
+        return scheduleFragment;
+    }
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_schedule_list_view);
-        userCourses = (ArrayList<Course>) getIntent().getSerializableExtra("COURSES");
-        listview = (ListView) findViewById(R.id.listView);
-        ScheduleAdapter adapter = new ScheduleAdapter(userCourses);
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof Callback){
+            callback = (Callback) context;
+        }
 
     }
 
-   /* @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_schedule_list_view,container,false);
+
+        studentCourses = (ArrayList<Course>)getArguments().getSerializable("COURSES");
+
         listview = (ListView) v.findViewById(R.id.listView);
-        ScheduleAdapter adapter = new ScheduleAdapter(userCourses);
+        ScheduleAdapter adapter = new ScheduleAdapter(studentCourses);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,16 +74,14 @@ public class ScheduleFragment extends AppCompatActivity {
             }
         });
 
-
-
         return v;
-    }*/
+    }
 
 
     public class ScheduleAdapter extends ArrayAdapter<Course>{
 
         public ScheduleAdapter(ArrayList<Course> course) {
-            super(getApplicationContext(), android.R.layout.simple_list_item_1, course);
+            super(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, course);
         }
 
         @Override
@@ -94,9 +93,9 @@ public class ScheduleFragment extends AppCompatActivity {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             if(convertView == null)
-                convertView = getLayoutInflater().inflate(R.layout.fragment_schedule_list_view_item,null);
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.fragment_schedule_list_view_item,null);
 
-            Course course = getItem(position);
+            final Course course = getItem(position);
             if(course != null) {
                  TextView tvTitle = (TextView) convertView.findViewById(R.id.tvCourseTitle);
                  tvTitle.setText(course.getTitle());
@@ -116,6 +115,15 @@ public class ScheduleFragment extends AppCompatActivity {
                  TextView tvEndDate = (TextView) convertView.findViewById(R.id.tvEndDate);
                  tvEndDate.setText(course.getEndDate());
 
+                Button bGetProbability = (Button) convertView.findViewById(R.id.bQuery);
+
+                bGetProbability.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       // Toast.makeText(getContext(),course.getStartTime(),Toast.LENGTH_SHORT).show();
+                        callback.queryProbabilities(course.getStartTime());
+                    }
+                });
             }
 
             return convertView;
