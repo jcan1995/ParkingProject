@@ -153,6 +153,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
                 MarkerOptions parkingLotMarker = new MarkerOptions();
                 parkingLotMarker.position(parkingLotProbabilities.get(i).getLocation());
                 parkingLotMarker.title(parkingLotProbabilities.get(i).getParkingLot());
+                parkingLotMarker.snippet("Percentage full: %"+ parkingLotProbabilities.get(i).getProbability());
                 map.addMarker(parkingLotMarker);
                 markerOptions.add(parkingLotMarker);
 
