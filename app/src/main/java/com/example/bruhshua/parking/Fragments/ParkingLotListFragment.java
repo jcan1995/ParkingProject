@@ -79,7 +79,7 @@ public class ParkingLotListFragment extends Fragment {
                 tvParkingLotName.setText(pojo.getParkingLot());
 
                 CircleProgress probability = (CircleProgress) convertView.findViewById(R.id.progressProbability);
-                probability.setProgress((int) pojo.getProbability());
+                probability.setProgress(pojo.getProbability());
 
             }
 

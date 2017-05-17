@@ -1,25 +1,74 @@
 package com.example.bruhshua.parking.Model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by bruhshua on 5/16/17.
  */
 
 public class ParkingLotProbabilityPOJO {
 
-    private double probability;
+    private int probability;
     private String parkingLot;
+    private LatLng location;
 
+    public ParkingLotProbabilityPOJO(){}
 
-    public ParkingLotProbabilityPOJO(double probability, String parkingLot) {
+    public ParkingLotProbabilityPOJO(int probability, String parkingLot) {
         this.probability = probability;
         this.parkingLot = parkingLot;
+        switch (parkingLot){
+            case "X":
+                this.location = new LatLng(33.132367,-117.164514);
+                break;
+            case "Y":
+                this.location = new LatLng(33.132367,-117.164514);
+                break;
+            case "Z":
+                this.location = new LatLng(33.132367,-117.164514);
+                break;
+            case "B":
+                this.location = new LatLng(33.127136,-117.163151);
+                break;
+            case "C":
+                this.location = new LatLng(33.126857,-117.161198);
+                break;
+            case "F":
+                this.location = new LatLng(33.126336,-117.156971);
+                break;
+            case "O":
+                this.location = new LatLng(33.133018,-117.158149);
+                break;
+            case "K":
+                this.location = new LatLng(33.134060,-117.155135);
+                break;
+            case "L":
+                this.location = new LatLng(33.132283,-117.159480);
+                break;
+            case "G":
+                this.location = new LatLng(33.132023,-117.157516);
+                break;
+            default:
+                this.location = new LatLng(33.129213,-117.159743);
+                break;
+        }
+
+
     }
 
-    public double getProbability() {
+    public LatLng getLocation() {
+        return location;
+    }
+
+    public void setLocation(LatLng location) {
+        this.location = location;
+    }
+
+    public int getProbability() {
         return probability;
     }
 
-    public void setProbability(double probability) {
+    public void setProbability(int probability) {
         this.probability = probability;
     }
 
