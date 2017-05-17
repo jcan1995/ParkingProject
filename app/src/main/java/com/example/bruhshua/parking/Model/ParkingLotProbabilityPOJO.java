@@ -19,13 +19,13 @@ public class ParkingLotProbabilityPOJO {
         this.parkingLot = parkingLot;
         switch (parkingLot){
             case "X":
-                this.location = new LatLng(33.132367,-117.164514);
+                this.location = new LatLng(33.127918,-117.163773);
                 break;
             case "Y":
-                this.location = new LatLng(33.132367,-117.164514);
+                this.location = new LatLng(33.128298,-117.164449);
                 break;
             case "Z":
-                this.location = new LatLng(33.132367,-117.164514);
+                this.location = new LatLng(33.129010,-117.164360);
                 break;
             case "B":
                 this.location = new LatLng(33.127136,-117.163151);

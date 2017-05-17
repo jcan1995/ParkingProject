@@ -17,14 +17,14 @@ public class Course implements Serializable {
     private String title;
     private String description;
     private String location;
-    private int room;
+    private String room;
     private String startTime;
     private String endTime;
     private String startDate;
     private String endDate;
 
     public Course(String title, String subject, String catalog, String section, String description,
-                  String location, int room, String startTime, String endTime, String startDate, String endDate) {
+                  String location, String room, String startTime, String endTime, String startDate, String endDate) {
         this.title = title;
 
         this.subject = subject;
@@ -86,11 +86,11 @@ public class Course implements Serializable {
         this.location = location;
     }
 
-    public int getRoom() {
+    public String getRoom() {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 

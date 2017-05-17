@@ -47,8 +47,8 @@ public class Singleton {
     //Reference from fragments like "Singleton.getInstance(getContext).getStudent()"
     private void setUp() {
         student = new Student("jcan1995","cantero.joshua@gmail.com","password","Joshua","Cantero");
-        Course course1 = new Course("History 130","History","Catalog","Section","History class.","Online Class",0,"9:45","10:45","August 21","December 6");
-        Course course2 = new Course("CS 436","Computer Science","Catalog","Section","CS class.","ACD 211",0,"1:00","1:45","August 21","December 6");
+        Course course1 = new Course("History 130","History","Catalog","Section","History class.","Online Class","Online","9:45","10:45","August 21","December 6");
+        Course course2 = new Course("CS 436","Computer Science","Catalog","Section","CS class.","Academic Building","211","1:00","1:45","August 21","December 6");
 
         student.addCourse(course1);
         student.addCourse(course2);

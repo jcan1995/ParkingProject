@@ -58,9 +58,8 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map_fragment,container,false);
 
-       // Toast.makeText(getContext(),"Time: "+time,Toast.LENGTH_SHORT).show();
         time = MainActivity.getTime();
-
+        Log.d("ParkingMapFragment","time: "+time);
         mSupportMapFragment = SupportMapFragment.newInstance();
         FragmentManager fm = getFragmentManager();
         mSupportMapFragment.getMapAsync(this);
@@ -74,14 +73,12 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
 
         if(time != null){
-            Toast.makeText(getContext(),"Time: "+time,Toast.LENGTH_SHORT).show();
             database = FirebaseDatabase.getInstance();
 
             java.util.Calendar c = java.util.Calendar.getInstance();
-            int dayTime = c.get(java.util.Calendar.DAY_OF_WEEK);
 
+            int dayTime = c.get(java.util.Calendar.DAY_OF_WEEK);
             String dayString = getDayOfTheWeekString(dayTime);
-            Log.d("ParkingMapFragment","Day of the week string: " + dayString);
 
             DatabaseReference myRef = database.getReference("Day/"+dayString+"/"+time);
             myRef.addValueEventListener(new ValueEventListener() {
@@ -98,8 +95,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
                         ParkingLotProbabilityPOJO pojo = new ParkingLotProbabilityPOJO(intProbability,parkingLotName);
                         parkingLotProbabilities.add(pojo);
-//                        Log.d("ParkingMapFragment", "ParkingLotName: " + messageSnapshot.child("ParkingLotName").getValue().toString());
-//                        Log.d("ParkingMapFragment", "ParkingLotProbability: " + messageSnapshot.child("Probability").getValue().toString());
+
                     }
                 }
 
@@ -108,9 +104,8 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
                 }
             });
+            updateUI();
 
-
-            //Todo: Query database, fill ParkingLotProbabilityPOJOs.
         }
 
         return v;
@@ -148,6 +143,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
     private void updateUI() {
 
         if(parkingLotProbabilities != null){
+            Log.d("ParkingMapFragment","inside updateUI");
 
             for(int i = 0; i < parkingLotProbabilities.size();i++){
                 MarkerOptions parkingLotMarker = new MarkerOptions();

@@ -98,10 +98,10 @@ public class ScheduleFragment extends Fragment {
             final Course course = getItem(position);
             if(course != null) {
                  TextView tvTitle = (TextView) convertView.findViewById(R.id.tvCourseTitle);
-                 tvTitle.setText(course.getTitle());
+                 tvTitle.setText(course.getLocation());
 
                  TextView tvDescription = (TextView) convertView.findViewById(R.id.tvCourseDescription);
-                 tvDescription.setText(course.getDescription());
+                 tvDescription.setText("Room: "+course.getRoom());
 
                  TextView tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
                  tvStartTime.setText(course.getStartTime());
