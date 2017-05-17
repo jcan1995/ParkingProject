@@ -19,7 +19,7 @@ import com.example.bruhshua.parking.Model.Student;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private String Fragment[] = {"Map","Other","My Schedule"};
+    private String Fragment[] = {"Map","List","My Schedule"};
     private Context context;//Student data can be passed to any fragment from this point.
 
     public ViewPagerAdapter(FragmentManager fm, Context context) {
@@ -27,7 +27,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         this.context = context;
     }
 
+    @Override
+    public int getItemPosition(Object object) {
 
+        Log.d("ViewPagerJosh","parkinglotlistfrag");
+
+        return super.getItemPosition(object);
+    }
 
     @Override
     public android.support.v4.app.Fragment getItem(int position) {

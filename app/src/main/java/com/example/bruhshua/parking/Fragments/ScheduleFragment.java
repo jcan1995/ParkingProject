@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bruhshua.parking.Model.Course;
+import com.example.bruhshua.parking.Model.Singleton;
 import com.example.bruhshua.parking.R;
 
 import org.w3c.dom.Text;
@@ -122,6 +123,9 @@ public class ScheduleFragment extends Fragment {
                     public void onClick(View v) {
                        // Toast.makeText(getContext(),course.getStartTime(),Toast.LENGTH_SHORT).show();
                         callback.queryProbabilities(course.getStartTime());
+                      //  Singleton.setTime(course.getStartTime());
+
+
                     }
                 });
             }

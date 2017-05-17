@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.bruhshua.parking.MainActivity;
 import com.example.bruhshua.parking.Model.Course;
 import com.example.bruhshua.parking.Model.ParkingLotProbabilityPOJO;
+import com.example.bruhshua.parking.Model.Singleton;
 import com.example.bruhshua.parking.R;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 
@@ -23,10 +26,12 @@ import java.util.List;
  * Created by bruhshua on 4/19/17.
  */
 
-public class ParkingLotListFragment extends Fragment {
+public class ParkingLotListFragment extends Fragment{
 
     private ListView listView;
     private ArrayList<ParkingLotProbabilityPOJO> pojo;
+    private View v;
+
 
     public static ParkingLotListFragment newInstance(ArrayList<ParkingLotProbabilityPOJO> pojo){
         ParkingLotListFragment parkingLotListragment = new ParkingLotListFragment();
@@ -39,13 +44,21 @@ public class ParkingLotListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_parking_lot_list_view,container,false);
-        pojo = (ArrayList<ParkingLotProbabilityPOJO>) getArguments().getSerializable("POJO");
+        v = inflater.inflate(R.layout.fragment_parking_lot_list_view,container,false);
+        Log.d("ParkingLotListFragment","in onCreateView");
+
+       // pojo = Singleton.getInstance(getContext()).getProbabilities();
+
+        // (ArrayList<ParkingLotProbabilityPOJO>) getArguments().getSerializable("POJO");
 
         if(pojo != null){
+            Log.d("List","pojo is NOT null");
+
             ParkingLotAdapter adapter = new ParkingLotAdapter(pojo);
             listView = (ListView) v.findViewById(R.id.parkingLotListView);
             listView.setAdapter(adapter);
+        }else{
+            Log.d("List","pojo is null");
         }
 
 

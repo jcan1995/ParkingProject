@@ -1,5 +1,6 @@
 package com.example.bruhshua.parking.Fragments;
 
+import android.content.Context;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.bruhshua.parking.MainActivity;
 import com.example.bruhshua.parking.Model.ParkingLotProbabilityPOJO;
+import com.example.bruhshua.parking.Model.Singleton;
 import com.example.bruhshua.parking.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -37,8 +39,6 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
     private SupportMapFragment mSupportMapFragment;
-    private String dayRequested;
-
     private String time;
     private FirebaseDatabase database;
 
@@ -51,6 +51,11 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
         Bundle args = new Bundle();
         parkingMapFragment.setArguments(args);
         return parkingMapFragment;
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
 
     @Nullable
@@ -109,6 +114,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
         }
 
         return v;
+
     }
 
     private String getDayOfTheWeekString(int day) {
@@ -154,16 +160,17 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
                 markerOptions.add(parkingLotMarker);
 
             }
+
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
             for(MarkerOptions marker: markerOptions) {
                 builder.include(marker.getPosition());
             }
+
             LatLngBounds bounds = builder.build();
             CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,32);//32
-            map.animateCamera(cu);
-
+           // map.animateCamera(cu);
+            map.moveCamera(cu);
         }
-
-
     }
 }
