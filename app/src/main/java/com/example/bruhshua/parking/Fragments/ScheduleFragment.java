@@ -1,5 +1,6 @@
 package com.example.bruhshua.parking.Fragments;
 
+import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class ScheduleFragment extends Fragment {
     private Callback callback;
     private FirebaseDatabase database;
     private  View v;
+    private ProgressDialog Dialog;
     public interface Callback{
         public void queryProbabilities(String time);
     }
@@ -84,6 +86,10 @@ public class ScheduleFragment extends Fragment {
 //        DatabaseReference myRef = database.getReference("StudentRecords/0");
         DatabaseReference myRef = database.getReference("StudentRecords/" +UserNumber);
 
+        Dialog = new ProgressDialog(getContext());
+        Dialog.setMessage("Fetching data...");
+        Dialog.show();
+
         myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -103,6 +109,9 @@ public class ScheduleFragment extends Fragment {
 
                         studentCourses.add(course5);
                     }
+
+                    //Dialog.hide();
+                    Dialog.dismiss();
                     listview = (ListView) v.findViewById(R.id.listView);
                     ScheduleAdapter adapter = new ScheduleAdapter(studentCourses);
                     listview.setAdapter(adapter);

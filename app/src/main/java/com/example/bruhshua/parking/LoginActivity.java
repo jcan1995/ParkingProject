@@ -1,9 +1,10 @@
 package com.example.bruhshua.parking;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import com.example.bruhshua.parking.Fragments.RegisterFragment;
  * Created by bruhshua on 5/1/17.
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,9 +23,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         Fragment fragment = new LoginFragment();
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.Framelayout,fragment)
                 .commit();
+//        getFragmentManager().beginTransaction()
+//                .replace(R.id.Framelayout,fragment)
+//                .commit();
     }
 
 

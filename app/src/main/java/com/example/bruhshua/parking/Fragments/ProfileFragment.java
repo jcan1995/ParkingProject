@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.bruhshua.parking.Model.Course;
 import com.example.bruhshua.parking.Model.Singleton;
@@ -23,10 +24,12 @@ import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
 
-    private Button bViewSchedule;
     private ArrayList<Course> courses = new ArrayList<>();//Temporary till singleton made
     private ImageView ivProfilePicture;
+    private TextView tvName;
+    private TextView tvEmail;
 
+    private Student student;
     public static ProfileFragment newInstance(){
         ProfileFragment profileFragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -45,20 +48,17 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile,container,false);
-        courses = Singleton.getInstance(getActivity().getApplicationContext()).getStudent().getCourses();
-        bViewSchedule = (Button) v.findViewById(R.id.bToSchedule);
-        bViewSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ScheduleFragment.class);
-                intent.putExtra("COURSES",courses);
-                startActivity(intent);
-
-            }
-        });
+       // courses = Singleton.getInstance(getActivity().getApplicationContext()).getStudent().getCourses();
+        student = Singleton.getInstance(getActivity().getApplicationContext()).getStudent();
 
         ivProfilePicture = (ImageView) v.findViewById(R.id.ivPicture);
         ivProfilePicture.setImageResource(R.drawable.profile_picture);
+
+        tvName = (TextView) v.findViewById(R.id.tvUserName);
+        tvName.setText(student.getFirstName() + " " + student.getLastName());
+
+        tvEmail = (TextView) v.findViewById(R.id.tvEmail);
+        tvEmail.setText(student.getEmail());
 
 
         return v;

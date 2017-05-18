@@ -1,6 +1,7 @@
 package com.example.bruhshua.parking.Fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +34,7 @@ public class LoginFragment extends Fragment {
     private EditText etEmail;
     private EditText etPassword;
     private Button bLogin;
+    private ProgressDialog Dialog;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -51,9 +53,14 @@ public class LoginFragment extends Fragment {
         etEmail = (EditText) v.findViewById(R.id.etEmail);
         etPassword = (EditText) v.findViewById(R.id.etPassword);
         bLogin = (Button) v.findViewById(R.id.bLogin);
+
+        Dialog = new ProgressDialog(getContext());
+        Dialog.setMessage("Authenticating...");
+
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Dialog.show();
 
                 if(!etEmail.getText().toString().equals("") || !etPassword.getText().toString().equals("") ) {
                     mAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
@@ -61,6 +68,7 @@ public class LoginFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+                                        Dialog.dismiss();
                                         Toast.makeText(getActivity().getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                                         getActivity().getFragmentManager().popBackStack();
                                         Intent i = new Intent(getActivity(), MainActivity.class);
@@ -83,7 +91,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
 
                 Fragment fragment = new RegisterFragment();
-                getActivity().getFragmentManager().beginTransaction()
+                getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Framelayout,fragment)
                         .addToBackStack(null)
                         .commit();
