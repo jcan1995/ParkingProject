@@ -81,7 +81,9 @@ public class ScheduleFragment extends Fragment {
 
         String UserNumber = Integer.toString(randomNum);
         Log.d("ScheduleFrag","UserNumber"+UserNumber);
-        DatabaseReference myRef = database.getReference("StudentRecords/0");
+//        DatabaseReference myRef = database.getReference("StudentRecords/0");
+        DatabaseReference myRef = database.getReference("StudentRecords/" +UserNumber);
+
         myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

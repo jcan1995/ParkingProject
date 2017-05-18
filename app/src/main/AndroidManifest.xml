@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:label="Parking Probability"
+        <activity android:name=".LoginActivity"
+            android:label="Back Lot"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBEcanyZ_eAVharRoNlJGp2QoTsYNz4KRo" />
 
-        <activity android:name=".LoginActivity" android:label="Login"/>
+        <activity android:name=".MainActivity" android:label="Back Lot"/>
        <!-- <activity android:name=".Fragments.ScheduleFragment" android:label="My Schedule"/> -->
 
     </application>
