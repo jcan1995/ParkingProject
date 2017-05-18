@@ -28,7 +28,7 @@ import org.w3c.dom.Text;
  */
 
 public class LoginFragment extends Fragment {
-
+//Test
     private TextView tvRegister;
     private EditText etEmail;
     private EditText etPassword;
