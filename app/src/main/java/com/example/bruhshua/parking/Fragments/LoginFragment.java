@@ -77,6 +77,9 @@ public class LoginFragment extends Fragment {
                                     }
                                     if (!task.isSuccessful()) {
                                         Log.d("LoginFragment", "Sign in failed");
+                                        Dialog.dismiss();
+                                        Toast.makeText(getActivity().getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
+
                                     }
                                 }
                             });

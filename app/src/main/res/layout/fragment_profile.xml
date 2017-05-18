@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/white"
     >
 
 
@@ -19,19 +20,30 @@
         android:id="@+id/tvUserName"
         android:gravity="center"
         android:text="Joshua Cantero"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:textSize="32sp"
         />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvEmail"
         android:text="cantero.joshua@gmail.com"
         android:textSize="16sp"
-
+        android:textColor="@color/colorAccent"
         android:gravity="center"
-
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Sign out"
+        android:id="@+id/bLogout"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        />
     </LinearLayout>
 

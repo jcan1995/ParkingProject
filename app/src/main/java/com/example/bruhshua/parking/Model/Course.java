@@ -22,9 +22,10 @@ public class Course implements Serializable {
     private String endTime;
     private String startDate;
     private String endDate;
+    private String dayOfWeek;
 
     public Course(String title, String subject, String catalog, String section, String description,
-                  String location, String room, String startTime, String endTime, String startDate, String endDate) {
+                  String location, String room, String startTime, String endTime, String startDate, String endDate, String DOW) {
         this.title = title;
 
         this.subject = subject;
@@ -37,8 +38,17 @@ public class Course implements Serializable {
         this.endTime = endTime;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.dayOfWeek = DOW;
     }
 
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
     public String getTitle() {
         return title;
     }

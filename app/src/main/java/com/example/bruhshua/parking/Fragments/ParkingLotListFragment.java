@@ -37,7 +37,6 @@ public class ParkingLotListFragment extends Fragment{
     private ArrayList<ParkingLotProbabilityPOJO> parkingLotProbabilities;
     private FirebaseDatabase database;
     private String time;
-
     private View v;
 
 
@@ -54,7 +53,7 @@ public class ParkingLotListFragment extends Fragment{
 
         v = inflater.inflate(R.layout.fragment_parking_lot_list_view,container,false);
         time = MainActivity.getTime();
-
+        //course = MainActivity.getCourse();
         if(parkingLotProbabilities != null){
             Log.d("ParkingLotListFrag","inside if");
 
@@ -72,6 +71,8 @@ public class ParkingLotListFragment extends Fragment{
             String dayString = getDayOfTheWeekString(dayTime);
 
             DatabaseReference myRef = database.getReference("Day/"+dayString+"/"+time);
+          //  DatabaseReference myRef = database.getReference("Day/"+dayString+"/"+course.getStartTime());
+
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

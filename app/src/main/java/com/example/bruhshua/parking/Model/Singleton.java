@@ -45,8 +45,8 @@ public class Singleton {
 
         student = new Student("jcan1995","cantero.joshua@gmail.com","password","Joshua","Cantero");
 
-        Course course1 = new Course("History 130","History","Catalog","Section","History class.","Online Class","Online","9:45","10:45","August 21","December 6");
-        Course course2 = new Course("CS 436","Computer Science","Catalog","Section","CS class.","Academic Building","211","1:00","1:45","August 21","December 6");
+        Course course1 = new Course("History 130","History","Catalog","Section","History class.","Online Class","Online","9:45","10:45","August 21","December 6","T");
+        Course course2 = new Course("CS 436","Computer Science","Catalog","Section","CS class.","Academic Building","211","1:00","1:45","August 21","December 6","M");
 
         student.addCourse(course1);
         student.addCourse(course2);

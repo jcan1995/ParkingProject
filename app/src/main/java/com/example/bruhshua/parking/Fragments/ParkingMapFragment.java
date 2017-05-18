@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.bruhshua.parking.MainActivity;
+import com.example.bruhshua.parking.Model.Course;
 import com.example.bruhshua.parking.Model.ParkingLotProbabilityPOJO;
 import com.example.bruhshua.parking.Model.Singleton;
 import com.example.bruhshua.parking.R;
@@ -65,8 +66,8 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
         Log.d("PArkingMapFragment","1st Frag");
 
         time = MainActivity.getTime();
-
-        Log.d("ParkingMapFragment","time: "+time);
+        //course = MainActivity.getCourse();
+       // Log.d("ParkingMapFragment","time: "+time);
         mSupportMapFragment = SupportMapFragment.newInstance();
         FragmentManager fm = getFragmentManager();
         mSupportMapFragment.getMapAsync(this);
@@ -85,9 +86,11 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
             java.util.Calendar c = java.util.Calendar.getInstance();
 
             int dayTime = c.get(java.util.Calendar.DAY_OF_WEEK);
+
             String dayString = getDayOfTheWeekString(dayTime);
 
             DatabaseReference myRef = database.getReference("Day/"+dayString+"/"+time);
+
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -117,6 +120,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
         return v;
 
     }
+
 
     private String getDayOfTheWeekString(int day) {
         switch (day){

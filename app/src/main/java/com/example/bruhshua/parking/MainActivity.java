@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.bruhshua.parking.Fragments.ParkingLotListFragment;
 import com.example.bruhshua.parking.Fragments.ParkingMapFragment;
 import com.example.bruhshua.parking.Fragments.ScheduleFragment;
+import com.example.bruhshua.parking.Model.Course;
 import com.example.bruhshua.parking.Model.ParkingLotProbabilityPOJO;
 import com.example.bruhshua.parking.Model.Singleton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragment.
 
     private static ArrayList<ParkingLotProbabilityPOJO> pojo = new ArrayList<>();
     private static String Time;
+   //private static Course course;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
@@ -75,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements ScheduleFragment.
         this.Time = time;
         mViewPager.setCurrentItem(0);
     }
+
+
+//    @Override
+//    public void queryProbabilities(Course course) {
+//        this.course= course;
+//        mViewPager.setCurrentItem(0);
+//    }
 
     public static String getTime(){
         return Time;

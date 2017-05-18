@@ -15,6 +15,7 @@ import com.example.bruhshua.parking.Model.Course;
 import com.example.bruhshua.parking.Model.Singleton;
 import com.example.bruhshua.parking.Model.Student;
 import com.example.bruhshua.parking.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -28,8 +29,11 @@ public class ProfileFragment extends Fragment {
     private ImageView ivProfilePicture;
     private TextView tvName;
     private TextView tvEmail;
-
+    private Button bLogout;
     private Student student;
+
+    private FirebaseAuth mAuth;
+
     public static ProfileFragment newInstance(){
         ProfileFragment profileFragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -60,6 +64,18 @@ public class ProfileFragment extends Fragment {
         tvEmail = (TextView) v.findViewById(R.id.tvEmail);
         tvEmail.setText(student.getEmail());
 
+        bLogout = (Button) v.findViewById(R.id.bLogout);
+        bLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+
+
+            }
+        });
 
         return v;
     }

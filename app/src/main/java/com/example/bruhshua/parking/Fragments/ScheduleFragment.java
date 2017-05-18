@@ -48,6 +48,8 @@ public class ScheduleFragment extends Fragment {
     private ProgressDialog Dialog;
     public interface Callback{
         public void queryProbabilities(String time);
+       // public void queryProbabilities(Course course);
+
     }
 
     public static ScheduleFragment newInstance(ArrayList<Course> courses){
@@ -102,10 +104,11 @@ public class ScheduleFragment extends Fragment {
                         String loc = messageSnapshot.child("Location").getValue().toString();
                         String room = messageSnapshot.child("Room").getValue().toString();
                         String startT = messageSnapshot.child("StartTime").getValue().toString();
+                        String DOW = messageSnapshot.child("DOW").getValue().toString();
                         String endT = messageSnapshot.child("EndTime").getValue().toString();
                         String startD = messageSnapshot.child("StartDate").getValue().toString();
                         String endD = messageSnapshot.child("EndDate").getValue().toString();
-                        Course course5 = new Course(title, subject, "Catalog", "Section", desc, loc, room, startT, endT, startD, endD);
+                        Course course5 = new Course(title, subject, "Catalog", "Section", desc, loc, room, startT, endT, startD, endD,DOW);
 
                         studentCourses.add(course5);
                     }
@@ -170,7 +173,8 @@ public class ScheduleFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                        // Toast.makeText(getContext(),course.getStartTime(),Toast.LENGTH_SHORT).show();
-                        callback.queryProbabilities(course.getStartTime());
+                       callback.queryProbabilities(course.getStartTime());
+                      //  callback.queryProbabilities(course);
                       //  Singleton.setTime(course.getStartTime());
 
 
