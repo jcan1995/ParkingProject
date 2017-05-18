@@ -62,8 +62,10 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_map_fragment,container,false);
+        Log.d("PArkingMapFragment","1st Frag");
 
         time = MainActivity.getTime();
+
         Log.d("ParkingMapFragment","time: "+time);
         mSupportMapFragment = SupportMapFragment.newInstance();
         FragmentManager fm = getFragmentManager();
@@ -102,6 +104,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
                         parkingLotProbabilities.add(pojo);
 
                     }
+                    updateUI();
                 }
 
                 @Override
@@ -109,8 +112,6 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
                 }
             });
-            updateUI();
-
         }
 
         return v;
@@ -148,7 +149,7 @@ public class ParkingMapFragment extends Fragment implements OnMapReadyCallback {
 
     private void updateUI() {
 
-        if(parkingLotProbabilities != null){
+        if(parkingLotProbabilities != null && map != null){
             Log.d("ParkingMapFragment","inside updateUI");
 
             for(int i = 0; i < parkingLotProbabilities.size();i++){

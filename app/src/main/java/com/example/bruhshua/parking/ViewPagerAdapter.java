@@ -19,7 +19,7 @@ import com.example.bruhshua.parking.Model.Student;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private String Fragment[] = {"Map","List","My Schedule"};
+    private String Fragment[] = {"Map","List","Profile","My Schedule"};
     private Context context;//Student data can be passed to any fragment from this point.
 
     public ViewPagerAdapter(FragmentManager fm, Context context) {
@@ -47,9 +47,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 ParkingLotListFragment parkingLotListFragment = ParkingLotListFragment.newInstance(Singleton.getInstance(context).getProbabilities());
                 return parkingLotListFragment;
 
-            case 2:
+            case 3:
                 ScheduleFragment scheduleFragment = ScheduleFragment.newInstance(Singleton.getInstance(context).getStudent().getCourses());
                 return scheduleFragment;
+
+            case 2:
+                ProfileFragment profileFragment = ProfileFragment.newInstance();
+                return profileFragment;
             default:
                 return null;
         }

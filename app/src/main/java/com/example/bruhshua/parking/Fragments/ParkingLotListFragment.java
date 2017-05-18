@@ -18,6 +18,11 @@ import com.example.bruhshua.parking.Model.ParkingLotProbabilityPOJO;
 import com.example.bruhshua.parking.Model.Singleton;
 import com.example.bruhshua.parking.R;
 import com.github.lzyzsd.circleprogress.CircleProgress;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +34,10 @@ import java.util.List;
 public class ParkingLotListFragment extends Fragment{
 
     private ListView listView;
-    private ArrayList<ParkingLotProbabilityPOJO> pojo;
+    private ArrayList<ParkingLotProbabilityPOJO> parkingLotProbabilities;
+    private FirebaseDatabase database;
+    private String time;
+
     private View v;
 
 
@@ -45,28 +53,87 @@ public class ParkingLotListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_parking_lot_list_view,container,false);
-        Log.d("ParkingLotListFragment","in onCreateView");
+        time = MainActivity.getTime();
 
-       // pojo = Singleton.getInstance(getContext()).getProbabilities();
+        if(parkingLotProbabilities != null){
+            Log.d("ParkingLotListFrag","inside if");
 
-        // (ArrayList<ParkingLotProbabilityPOJO>) getArguments().getSerializable("POJO");
-
-        if(pojo != null){
-            Log.d("List","pojo is NOT null");
-
-            ParkingLotAdapter adapter = new ParkingLotAdapter(pojo);
+            ParkingLotAdapter adapter = new ParkingLotAdapter(parkingLotProbabilities);
             listView = (ListView) v.findViewById(R.id.parkingLotListView);
             listView.setAdapter(adapter);
-        }else{
-            Log.d("List","pojo is null");
         }
 
+        if(time != null){
+            database = FirebaseDatabase.getInstance();
 
+            java.util.Calendar c = java.util.Calendar.getInstance();
+
+            int dayTime = c.get(java.util.Calendar.DAY_OF_WEEK);
+            String dayString = getDayOfTheWeekString(dayTime);
+
+            DatabaseReference myRef = database.getReference("Day/"+dayString+"/"+time);
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.d("ParkingLotListFrag","querying data");
+
+                    parkingLotProbabilities = new ArrayList<ParkingLotProbabilityPOJO>();
+                    for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+
+                        String parkingLotName = messageSnapshot.child("ParkingLotName").getValue().toString();
+                        Long probability = ((Long) messageSnapshot.child("Probability").getValue());
+
+                        int intProbability = probability.intValue();
+
+                        ParkingLotProbabilityPOJO pojo = new ParkingLotProbabilityPOJO(intProbability,parkingLotName);
+                        parkingLotProbabilities.add(pojo);
+
+                    }
+                    updateUI();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            Log.d("ParkingLotListFrag","time is null");
+
+        }
 
         return v;
+    }
+
+    private void updateUI() {
+        Log.d("ParkingLotListFrag","inside update UI");
+
+        ParkingLotAdapter adapter = new ParkingLotAdapter(parkingLotProbabilities);
+        listView = (ListView) v.findViewById(R.id.parkingLotListView);
+        listView.setAdapter(adapter);
 
     }
 
+    private String getDayOfTheWeekString(int day) {
+        switch (day){
+            case 1:
+                return "Sunday";
+            case 2:
+                return "Monday";
+            case 3:
+                return "Tuesday";
+            case 4:
+                return "Wednesday";
+            case 5:
+                return "Thursday";
+            case 6:
+                return "Friday";
+            case 7:
+                return "Saturday";
+            default:
+                return "Monday";
+        }
+    }
     public class ParkingLotAdapter extends ArrayAdapter<ParkingLotProbabilityPOJO> {
 
         public ParkingLotAdapter(ArrayList<ParkingLotProbabilityPOJO> pojo) {
@@ -89,7 +156,7 @@ public class ParkingLotListFragment extends Fragment{
             if(pojo != null) {
 
                 TextView tvParkingLotName = (TextView) convertView.findViewById(R.id.tvParkingLotName);
-                tvParkingLotName.setText(pojo.getParkingLot());
+                tvParkingLotName.setText("Parking Lot "+pojo.getParkingLot());
 
                 CircleProgress probability = (CircleProgress) convertView.findViewById(R.id.progressProbability);
                 probability.setProgress(pojo.getProbability());
