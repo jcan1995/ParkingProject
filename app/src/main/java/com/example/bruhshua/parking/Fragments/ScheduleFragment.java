@@ -46,6 +46,7 @@ public class ScheduleFragment extends Fragment {
     private FirebaseDatabase database;
     private  View v;
     private ProgressDialog Dialog;
+
     public interface Callback{
         public void queryProbabilities(String time);
        // public void queryProbabilities(Course course);
